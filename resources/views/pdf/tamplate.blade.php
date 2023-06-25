@@ -36,8 +36,8 @@
             position: absolute;
             z-index: -10;
             bottom: 200px;
-            right: 200px;
-            width: 200px;
+            right: 300px;
+            width: 100px;
         }
 
         .certified {
@@ -45,7 +45,7 @@
             z-index: -10;
             bottom: 200px;
             right: 100px;
-            width: 200px;
+            width: 150px;
         }
 
         .draft {
@@ -55,13 +55,12 @@
     </style>
 </head>
 
-<body>
+<body background="/assets/img/logo/background.png">
     <div>
-        <img class="marlion-logo" src="{{ asset('/assets/img/logo/logo.png') }}">
-        <img src="{{ asset('/assets/img/logo/draft.png') }}" alt="" class="draft">
+        <!-- <img src="{{ asset('/assets/img/logo/draft.png') }}" alt="" class="draft">
         <img class="marlion-logo2" src="{{ asset('/assets/img/logo/logo.png') }}">
-        <img class="tab-logo" src="{{ asset('/assets/img/logo/logo.png') }}">
-        <img class="certified" src="{{ asset('/assets/img/logo/logo.png') }}">
+        <img class="tab-logo" src="{{ asset('/assets/img/logo/tab.png') }}">
+        <img class="certified" src="{{ asset('/assets/img/logo/Asset mark 9k.png') }}"> -->
     </div>
     <table style="width: 100%;">
         <tr>
@@ -71,23 +70,21 @@
         </tr>
         <tr>
             <td colspan="2">
-                <span>INFORMATION SECURITY MANAGEMENT SYSTEM</span>
+                <span>{{$sub_title}}</span>
             </td>
         </tr>
         <tr>
             <td colspan="2" style="height: 50px; vertical-align: top;">
-                <span style="font-size: 20px;">ISO {{ $number }}</span>
+                <span style="font-size: 20px;">{{ $title }}</span>
             </td>
         </tr>
         <tr>
-            <td style="vertical-align: top;">
+            <td style="vertical-align: top; width: 50%;">
                 <span>This is to certify that:</span>
             </td>
             <td>
-                <span>PT CHANDRA ANDHESTHI CAKSANA <br>
-                    The City Residence Komplek Rukan Malibu Blok J No.<br>
-                    36, Cengkareng Timur, Cengkareng Kota, Jakarta Barat,<br>
-                    Jakarta, Indonesia
+                <span>{{$name}} <br>
+                    {{$address}}
                 </span>
             </td>
         </tr>
@@ -96,13 +93,13 @@
                 <span>Holds Certificate No:</span>
             </td>
             <td>
-                <span>ISO {{ $number }}</span>
+                <span>{{ $number }}</span>
             </td>
         </tr>
         <tr style="height: 30px; vertical-align: bottom;">
             <td colspan="2">
-                <span>and operates an Information Security Management System which complies with the
-                    requirements of ISO 27001:2013 for the following scope:</span>
+                <span>and operates an {{ $sub_title}} which complies with the
+                    requirements of {{$title}} for the following scope:</span>
             </td>
         </tr>
         <tr style="height: 30px; text-align: right;">
@@ -116,7 +113,7 @@
             </td>
             <td>
                 <hr style="width: 200px;">
-                <span>Managing Director</span>
+                <span style="justify-content: center;">Managing Director</span>
             </td>
         </tr>
         <tr>

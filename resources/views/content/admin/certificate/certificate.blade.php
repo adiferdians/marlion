@@ -29,6 +29,8 @@
                             <th>Tipe Trining</th>
                             <th>Title</th>
                             <th>Nomor Sertifikat</th>
+                            <th>Alamat</th>
+                            <th>Scope</th>
                             <th>Diterbitkan</th>
                             <th>Kadaluarsa</th>
                             <th>Tanggal Sertifikat</th>
@@ -41,6 +43,8 @@
                             <th>Tipe Trining</th>
                             <th>Title</th>
                             <th>Nomor Sertifikat</th>
+                            <th>Alamat</th>
+                            <th>Scope</th>
                             <th>Diterbitkan</th>
                             <th>Kadaluarsa</th>
                             <th>Tanggal Sertifikat</th>
@@ -64,6 +68,8 @@
                             <td>{{$cert->type}}</td>
                             <td>{{$cert->title}}</td>
                             <td>{{$cert->number}}</td>
+                            <td>{{$cert->address}}</td>
+                            <td>{{$cert->scope}}</td>
                             <td>{{$cert->effective}}</td>
                             <td>{{$cert->expired}}</td>
                             <td>{{$cert->date}}</td>

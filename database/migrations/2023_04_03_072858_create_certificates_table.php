@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('type');
             $table->string('title');
             $table->string('sub_title');
+            $table->text('address');
+            $table->text('scope');
             $table->string('number');
             $table->string('number_convert');
             $table->string('effective');

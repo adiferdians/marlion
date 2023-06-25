@@ -5,7 +5,7 @@
     </tr>
     <tr>
         <td>Nama</td>
-        <td><input type="text" style="width: 100%" class="input-group-text" placeholder="Nama" type="text" id="name" value="{{$cert->name}}"></td>
+        <td><input type="text" style="width: 100%" class="form-control" placeholder="Nama" type="text" id="name" value="{{$cert->name}}"></td>
     </tr>
     <tr>
         <td>Tipe Training</td>
@@ -18,38 +18,47 @@
         </td>
     </tr>
     <tr>
+        <td>Nomor Sertifikat</td>
+        <td><input type="text" style="width: 100%" class="form-control" placeholder="Nomor Sertifikat" type="text" id="number" value="{{$cert->number}}">
+        </td>
+    </tr>
+    <tr>
         <td>Title</td>
-        <td><input type="text" style="width: 100%" class="input-group-text" placeholder="Title" type="text" id="title" value="{{$cert->title}}">
+        <td><input type="text" style="width: 100%" class="form-control" placeholder="Title" type="text" id="title" value="{{$cert->title}}">
         </td>
     </tr>
     <tr>
         <td>Sub Title</td>
-        <td><input type="text" style="width: 100%" class="input-group-text" placeholder="Sub Title" type="text" id="sub_title" value="{{$cert->sub_title}}">
+        <td><input type="text" style="width: 100%" class="form-control" placeholder="Sub Title" type="text" id="sub_title" value="{{$cert->sub_title}}">
         </td>
     </tr>
     <tr>
-        <td>Nomor Sertifikat</td>
-        <td><input type="text" style="width: 100%" class="input-group-text" placeholder="Nomor Sertifikat" type="text" id="number" value="{{$cert->number}}">
+        <td>Alamat</td>
+        <td><textarea type="text" style="width: 100%; height: 100px;" class="form-control" placeholder="Alamat" type="text" id="address" >{{$cert->address}}</textarea>
+        </td>
+    </tr>
+    <tr>
+        <td>Scope</td>
+        <td><textarea type="text" style="width: 100%; height: 100px;" class="form-control" placeholder="Scope" type="text" id="scope">{{$cert->scope}}</textarea>
         </td>
     </tr>
     <tr>
         <td>Trining Mulai Dan Training Selesai</td>
         <td>
             <div style="display: flex;">
-                <input type="date" style="width: 50%;" class="input-group-text" type="text" id="effective" value="{{$cert->effective}}">
-                <input type="date" style="width: 50%;" class="input-group-text" type="text" id="expired" value="{{$cert->expired}}">
+                <input type="date" style="width: 50%;" class="form-control" type="text" id="effective" value="{{$cert->effective}}">
+                <input type="date" style="width: 50%;" class="form-control" type="text" id="expired" value="{{$cert->expired}}">
             </div>
         </td>
     </tr>
     <tr>
         <td>Tanggal Sertifikat</td>
-        <td><input type="date" style="width: 100%;" class="input-group-text" type="text" id="date" value="{{$cert->date}}">
+        <td><input type="date" style="width: 100%;" class="form-control" type="text" id="date" value="{{$cert->date}}">
         </td>
     </tr>
     <tr>
         <td colspan="2" align="center">
-            <button class="btn btn-secondary" type="reset" id="close"><i class="fa fa-times"></i> Batal</button>
-            <button type="submit" class="btn btn-success" id="send"><i class="fa fa-floppy-o"></i> Simpan</button>
+            <button type="submit" style="width: 100%;" class="btn btn-success" id="send"><i class="fa fa-floppy-o"></i> Simpan</button>
         </td>
     </tr>
     @endforeach
@@ -62,6 +71,8 @@
         const type = $('#type').val();
         const title = $('#title').val();
         const subTitle = $('#sub_title').val();
+        const address = $('#address').val();
+        const scope = $('#scope').val();
         const number = $('#number').val();
         const number_convert = number.replace(new RegExp("/", "g"), "");
         const effective = $('#effective').val();
@@ -73,6 +84,8 @@
             type,
             title,
             subTitle,
+            address,
+            scope,
             number,
             number_convert,
             effective,

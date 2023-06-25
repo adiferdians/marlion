@@ -32,6 +32,8 @@ class CertificateController extends Controller
             'name'   => 'required',
             'title'   => 'required',
             'subTitle'   => 'required',
+            'address'   => 'required',
+            'scope'   => 'required',
             'type'   => 'required',
             'effective'   => 'required',
             'expired'   => 'required',
@@ -56,7 +58,7 @@ class CertificateController extends Controller
             $number = $alphabet[$remainder] . $number;
             $increment = ($increment - $remainder) / $base;
         }
-        $code = str_pad($number, 3, 'A', STR_PAD_LEFT);
+        $code = str_pad($number, 4, 'A', STR_PAD_LEFT);
 
         if ($request->type == "Public Training") {
             $kodeType = "PT";
@@ -94,6 +96,8 @@ class CertificateController extends Controller
                 'name' => strtolower($request->name),
                 'title' => $request->title,
                 'sub_title' => $request->subTitle,
+                'address' => $request->address,
+                'scope' => $request->scope,
                 'type' => $request->type,
                 'number' => $code . "/" . $kodeType . "/" . $bulan_romawi . "/" . $tahun,
                 'number_convert' => $code . $kodeType . $bulan_romawi . $tahun,
@@ -129,6 +133,8 @@ class CertificateController extends Controller
             'name'   => 'required',
             'title'   => 'required',
             'subTitle'   => 'required',
+            'address'   => 'required',
+            'scope'   => 'required',
             'type'   => 'required',
             'number' => 'required',
             'effective'   => 'required',
@@ -148,6 +154,8 @@ class CertificateController extends Controller
                 'name' => strtolower($request->name),
                 'title' => $request->title,
                 'sub_title' => $request->subTitle,
+                'address' => $request->address,
+                'scope' => $request->address,
                 'type' => $request->type,
                 'number' => $request->number,
                 'number_convert' => $request->number_convert,
@@ -195,29 +203,36 @@ class CertificateController extends Controller
         ]);
     }
 
-    public function printPDF(Request $request, $id=56)
+    public function printPDF(Request $request, $id=50)
     {
         $certificate = certificate::where('id', $id)->get();
 
         $data = [
-            'title' => 'Certificate Of registration',
-            'users' => $certificate[0]['name'],
+            'title' => $certificate[0]['title'],
+            'sub_title' => $certificate[0]['sub_title'],
+            'name' => $certificate[0]['name'],
             'number' => $certificate[0]['number'],
+            'address' => $certificate[0]['address'],
+            'scope' => $certificate[0]['scope'],
             'effective' => $certificate[0]['effective'],
             'expired' => $certificate[0]['expired']
         ];
 
         $pdf = PDF::loadView('pdf.tamplate', $data);
+        $pdf->setPaper('A4', 'landscape');
         return $pdf->download('users_pdf_example.pdf');
     }
 
-    public function test(Request $request, $id=56){
+    public function test(Request $request, $id=50){
         $certificate = certificate::where('id', $id)->get();
 
         $data = [
-            'title' => 'Certificate Of registration',
-            'users' => $certificate[0]['name'],
+            'title' => $certificate[0]['title'],
+            'sub_title' => $certificate[0]['sub_title'],
+            'name' => $certificate[0]['name'],
             'number' => $certificate[0]['number'],
+            'address' => $certificate[0]['address'],
+            'scope' => $certificate[0]['scope'],
             'effective' => $certificate[0]['effective'],
             'expired' => $certificate[0]['expired']
         ];

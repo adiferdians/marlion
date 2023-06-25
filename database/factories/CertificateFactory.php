@@ -21,6 +21,8 @@ class CertificateFactory extends Factory
             'type' => $this->faker->text(8),
             'title' => $this->faker->text(5),
             'sub_title' => $this->faker->text(5),
+            'address' => $this->faker->paragraph(),
+            'scope' => $this->faker->paragraph(),
             'number' => $this->faker->randomNumber(7, true),
             'number_convert' => $this->faker->randomNumber(7, true),
             'effective' => $this->faker->date(),

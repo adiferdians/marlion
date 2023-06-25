@@ -1,7 +1,7 @@
 <table border="0" class="table table-light" id="tableCertificate">
     <tr>
         <td>Nama</td>
-        <td><input type="text" style="width: 100%" class="input-group-text" placeholder="Nama" type="text" id="name"></td>
+        <td><input type="text" style="width: 100%" class="form-control" placeholder="Nama" type="text" id="name"></td>
     </tr>
     <tr>
         <td>Tipe Training</td>
@@ -15,32 +15,41 @@
     </tr>
     <tr>
         <td>Title</td>
-        <td><input type="text" style="width: 100%" class="input-group-text" placeholder="Title" type="text" id="title">
+        <td><input type="text" style="width: 100%" class="form-control" placeholder="Title" type="text" id="title">
         </td>
     </tr>
     <tr>
         <td>Sub Title</td>
-        <td><input type="text" style="width: 100%" class="input-group-text" placeholder="Sub Title" type="text" id="sub_title">
+        <td><input type="text" style="width: 100%" class="form-control" placeholder="Sub Title" type="text" id="sub_title">
+        </td>
+    </tr>
+    <tr>
+        <td>Alamat</td>
+        <td><textarea type="text" style="width: 100%; height: 100px;" class="form-control" placeholder="Alamat" type="text" id="address"></textarea>
+        </td>
+    </tr>
+    <tr>
+        <td>Scope</td>
+        <td><textarea type="text" style="width: 100%; height: 100px;" class="form-control" placeholder="Scope" type="text" id="scope"></textarea>
         </td>
     </tr>
     <tr>
     <td>Trining Mulai Dan Training Selesai</td>
         <td>
             <div style="display: flex;">
-                <input type="date" style="width: 50%;" class="input-group-text" type="text" id="effective">
-                <input type="date" style="width: 50%;" class="input-group-text" type="text" id="expired">
+                <input type="date" style="width: 50%;" class="form-control" type="text" id="effective">
+                <input type="date" style="width: 50%;" class="form-control" type="text" id="expired">
             </div>
         </td>
     </tr>
     <tr>
         <td>Tanggal Sertifikat</td>
-        <td><input type="date" style="width: 100%;" class="input-group-text" type="text" id="date">
+        <td><input type="date" style="width: 100%;" class="form-control" type="text" id="date">
         </td>
     </tr>
     <tr>
         <td colspan="2" align="center">
-            <button class="btn btn-secondary" type="reset" id="close"><i class="fa fa-times"></i> Batal</button>
-            <button type="submit" class="btn btn-success" id="send"><i class="fa fa-floppy-o"></i> Simpan</button>
+            <button type="submit" style="width: 100%;" class="btn btn-success" id="send"><i class="fa fa-floppy-o"></i> Simpan</button>
         </td>
     </tr>
 </table>
@@ -51,6 +60,8 @@
         const type = $('#type').val();
         const title = $('#title').val();
         const subTitle = $('#sub_title').val();
+        const address = $('#address').val();
+        const scope = $('#scope').val();
         const effective = $('#effective').val();
         const expired = $('#expired').val();
         const date = $('#date').val();
@@ -60,6 +71,8 @@
             type,
             title,
             subTitle,
+            address,
+            scope,
             effective,
             expired,
             date

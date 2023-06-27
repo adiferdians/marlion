@@ -35,5 +35,5 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::get('/', [verificationController::class, 'index']);
-Route::get('/{number}', [verificationController::class, 'indexSpecific']);
+Route::post('/{number}', [verificationController::class, 'indexSpecific']);
 Route::post('/', [verificationController::class, 'find']);

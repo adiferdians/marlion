@@ -190,23 +190,15 @@ class CertificateController extends Controller
         $data->where('id', $id)->delete();
     }
 
-
-    public function generateQrCode($number)
+    public function printPDF(Request $request, $id=50,)
     {
+        $number = "hbdsalsdasdl";
+        $certificate = certificate::where('id', $id)->get();
         $qrCode = QrCode::format('svg')
             ->size(1000)
             ->errorCorrection('H')
             ->generate(url("/verifikasi/" . $number));
 
-        return response()->json([
-            'DATA' => base64_encode($qrCode)
-        ]);
-    }
-
-    public function printPDF(Request $request, $id=50)
-    {
-        $certificate = certificate::where('id', $id)->get();
-
         $data = [
             'title' => $certificate[0]['title'],
             'sub_title' => $certificate[0]['sub_title'],
@@ -215,28 +207,12 @@ class CertificateController extends Controller
             'address' => $certificate[0]['address'],
             'scope' => $certificate[0]['scope'],
             'effective' => $certificate[0]['effective'],
-            'expired' => $certificate[0]['expired']
+            'expired' => $certificate[0]['expired'],
+            'qrCode' => base64_encode($qrCode),
         ];
 
         $pdf = PDF::loadView('pdf.tamplate', $data);
-        $pdf->setPaper('A4', 'landscape');
-        return $pdf->download('users_pdf_example.pdf');
-    }
-
-    public function test(Request $request, $id=50){
-        $certificate = certificate::where('id', $id)->get();
-
-        $data = [
-            'title' => $certificate[0]['title'],
-            'sub_title' => $certificate[0]['sub_title'],
-            'name' => $certificate[0]['name'],
-            'number' => $certificate[0]['number'],
-            'address' => $certificate[0]['address'],
-            'scope' => $certificate[0]['scope'],
-            'effective' => $certificate[0]['effective'],
-            'expired' => $certificate[0]['expired']
-        ];
-
-        return view("pdf.tamplate", $data);
+        $pdf->setPaper('A4', 'portrait');
+        return $pdf->stream();
     }
 }

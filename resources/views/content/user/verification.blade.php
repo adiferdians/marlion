@@ -68,13 +68,16 @@
                                 <table class="table table-responsive" id="dataTable" cellspacing="0">
                                     <thead class="thead-light">
                                         <tr>
-                                            <th>Nama Peserta</th>
-                                            <th>Tipe Training</th>
-                                            <th>Title Training</th>
-                                            <th>Nomor Sertifikat</th>
-                                            <th>Training Mulai</th>
-                                            <th>Training Selesai</th>
-                                            <th>Tanggal Sertifikat</th>
+                                            <th>Name</th>
+                                            <th>Type Training</th>
+                                            <th>Title</th>
+                                            <th>Sub Title</th>
+                                            <th>Number</th>
+                                            <th>Address</th>
+                                            <th>SScope</th>
+                                            <th>Effective Date</th>
+                                            <th>Expired Date</th>
+                                            <th>Date</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -83,9 +86,12 @@
                                             <td>{{$certificate[0]['name']}}</td>
                                             <td>{{$certificate[0]['type']}}</td>
                                             <td>{{$certificate[0]['title']}}</td>
+                                            <td>{{$certificate[0]['sub_title']}}</td>
                                             <td>{{$certificate[0]['number']}}</td>
-                                            <td>{{$certificate[0]['start']}}</td>
-                                            <td>{{$certificate[0]['end']}}</td>
+                                            <td>{{$certificate[0]['address']}}</td>
+                                            <td>{{$certificate[0]['scope']}}</td>
+                                            <td>{{$certificate[0]['effective']}}</td>
+                                            <td>{{$certificate[0]['expired']}}</td>
                                             <td>{{$certificate[0]['date']}}</td>
                                         </tr>
                                         @endif
@@ -109,12 +115,14 @@
     </footer>
     <!-- End of Footer -->
 </body>
+
 <script>
     $('#send').click(function() {
         let nama = $('#nama').val();
         let nomor = $('#nomor').val();
         let newNumber = nomor.split("/");
-        axios.post(`/verifikasi`, {
+
+        axios.post(`/`, {
             nama,
             newNumber
         }).then((response) => {
@@ -134,9 +142,12 @@
                         '<td>' + data.name + '</td>' +
                         '<td>' + data.type + '</td>' +
                         '<td>' + data.title + '</td>' +
+                        '<td>' + data.sub_title + '</td>' +
+                        '<td>' + data.address + '</td>' +
+                        '<td>' + data.scope + '</td>' +
                         '<td>' + data.number + '</td>' +
-                        '<td>' + data.start + '</td>' +
-                        '<td>' + data.end + '</td>' +
+                        '<td>' + data.effective + '</td>' +
+                        '<td>' + data.expired + '</td>' +
                         '<td>' + data.date + '</td>' +
                         '</tr>';
                     tableBody.append(row);

@@ -28,6 +28,7 @@
         .marlion-logo2 {
             position: absolute;
             z-index: -10;
+            left: 0;
             bottom: 200px;
             width: 200px;
         }
@@ -36,7 +37,7 @@
             position: absolute;
             z-index: -10;
             bottom: 200px;
-            right: 300px;
+            right: 200px;
             width: 100px;
         }
 
@@ -44,23 +45,46 @@
             position: absolute;
             z-index: -10;
             bottom: 200px;
-            right: 100px;
+            right: 0px;
             width: 150px;
         }
 
         .draft {
             position: absolute;
-            z-index: -9;
+            left: 0;
+            width: 800px;
+            z-index: 100;
+        }
+
+        .qrCode {
+            position: absolute;
+            right: 0;
+            width: 80px;
+        }
+
+        .bgimage {
+            z-index: -99;
+            position: absolute;
+            width: 800px;
+            top: -70px;
+            right: -50px;
+        }
+
+        .sign {
+            width: 150px;
+            padding-left: 70px;
         }
     </style>
 </head>
 
-<body background="/assets/img/logo/background.png">
+<body>
     <div>
-        <!-- <img src="{{ asset('/assets/img/logo/draft.png') }}" alt="" class="draft">
-        <img class="marlion-logo2" src="{{ asset('/assets/img/logo/logo.png') }}">
-        <img class="tab-logo" src="{{ asset('/assets/img/logo/tab.png') }}">
-        <img class="certified" src="{{ asset('/assets/img/logo/Asset mark 9k.png') }}"> -->
+        <img class="draft" src="{{ public_path('/assets/img/logo/draft.png') }}">
+        <img class="marlion-logo2" src="{{ public_path('/assets/img/logo/logo.png') }}">
+        <img class="tab-logo" src="{{ public_path('/assets/img/logo/tab.png') }}">
+        <img class="certified" src="{{ public_path('/assets/img/logo/Asset mark 9k.png') }}">
+        <img class="qrCode" width="300" height="auto" src="data:image/svg+xml;base64,{{$qrCode}}" alt="QR Code" />
+        <img class="bgimage" src="{{ public_path('/assets/img/logo/background.png') }}">
     </div>
     <table style="width: 100%;">
         <tr>
@@ -88,7 +112,12 @@
                 </span>
             </td>
         </tr>
-        <tr style="height: 80px; vertical-align: bottom;">
+        <tr>
+            <td>
+                <img style="height: 30px;" src="{{ public_path('/assets/img/space.png') }}">
+            </td>
+        </tr>
+        <tr>
             <td>
                 <span>Holds Certificate No:</span>
             </td>
@@ -96,38 +125,50 @@
                 <span>{{ $number }}</span>
             </td>
         </tr>
-        <tr style="height: 30px; vertical-align: bottom;">
-            <td colspan="2">
-                <span>and operates an {{ $sub_title}} which complies with the
-                    requirements of {{$title}} for the following scope:</span>
+        <tr>
+            <td>
+                <img style="height: 30px;" src="{{ public_path('/assets/img/space.png') }}">
             </td>
         </tr>
-        <tr style="height: 30px; text-align: right;">
+        <tr>
             <td colspan="2">
-                <span>Provision of information technology services including software and hardware.</span>
+                <span>and operates an {{ $sub_title}} which complies with the<br>
+                    requirements of {{$title}} for the following scope: <br><br>
+                    {{$scope}}</span>
             </td>
         </tr>
-        <tr style="height: 250px; vertical-align: bottom;">
+        <tr>
+            <td>
+                <img style="height: 30px;" src="{{ public_path('/assets/img/space.png') }}">
+            </td>
+        </tr>
+        <tr style="vertical-align: bottom;">
             <td>
                 <span>For and on behalf of Merlion:</span>
             </td>
             <td>
+                <img class="sign" src="{{ public_path('/assets/img/logo/tab.png') }}">
                 <hr style="width: 200px;">
-                <span style="justify-content: center;">Managing Director</span>
+                <span style="padding-left: 90px;">Managing Director</span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <img style="height: 10px;" src="{{ public_path('/assets/img/space.png') }}">
             </td>
         </tr>
         <tr>
             <td></td>
             <td>
                 <span>Effective date : </span>
-                <span>&emsp;{{ $effective}}</span>
+                <span>{{ $effective}}</span>
             </td>
         </tr>
         <tr>
             <td></td>
             <td>
-                <span>Expiry date &emsp;: </span>
-                <span>&emsp;{{ $expired}}</span>
+                <span>Expiry date : </span>
+                <span>{{ $expired}}</span>
             </td>
         </tr>
         <tr style="width: 300px;">

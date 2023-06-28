@@ -155,7 +155,7 @@ class CertificateController extends Controller
                 'title' => $request->title,
                 'sub_title' => $request->subTitle,
                 'address' => $request->address,
-                'scope' => $request->address,
+                'scope' => $request->scope,
                 'type' => $request->type,
                 'number' => $request->number,
                 'number_convert' => $request->number_convert,
@@ -190,14 +190,13 @@ class CertificateController extends Controller
         $data->where('id', $id)->delete();
     }
 
-    public function printPDF(Request $request, $id=50,)
+    public function printPDF($id, $number)
     {
-        $number = "hbdsalsdasdl";
         $certificate = certificate::where('id', $id)->get();
         $qrCode = QrCode::format('svg')
             ->size(1000)
             ->errorCorrection('H')
-            ->generate(url("/verifikasi/" . $number));
+            ->generate(url("/" . $number));
 
         $data = [
             'title' => $certificate[0]['title'],

@@ -68,16 +68,16 @@
                                 <table class="table table-responsive" id="dataTable" cellspacing="0">
                                     <thead class="thead-light">
                                         <tr>
-                                            <th>Name</th>
-                                            <th>Type Training</th>
-                                            <th>Title</th>
-                                            <th>Sub Title</th>
-                                            <th>Number</th>
-                                            <th>Address</th>
-                                            <th>SScope</th>
-                                            <th>Effective Date</th>
-                                            <th>Expired Date</th>
-                                            <th>Date</th>
+                                            <th style="vertical-align: middle; text-align:center">Name</th>
+                                            <th style="vertical-align: middle; text-align:center">Type Training</th>
+                                            <th style="vertical-align: middle; text-align:center">Title</th>
+                                            <th style="vertical-align: middle; text-align:center">Sub Title</th>
+                                            <th style="vertical-align: middle; text-align:center">Number</th>
+                                            <th style="vertical-align: middle; text-align:center">Address</th>
+                                            <th style="vertical-align: middle; text-align:center">Scope</th>
+                                            <th style="vertical-align: middle; text-align:center">Effective Date</th>
+                                            <th style="vertical-align: middle; text-align:center">Expired Date</th>
+                                            <th style="vertical-align: middle; text-align:center">Date</th>
                                         </tr>
                                     </thead>
                                     <tbody>

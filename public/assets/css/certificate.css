@@ -68,6 +68,10 @@
     max-width: 160px;
 }
 
+.actBtn{
+    width: 50px;
+}
+
 @media (max-width: 767.98px) {
     .contentVerif {
         display: block;

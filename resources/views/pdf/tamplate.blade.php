@@ -172,7 +172,7 @@
             </td>
         </tr>
         <tr style="width: 300px;">
-            <td style="height: 300px; vertical-align: bottom;">
+            <td style="height: 380px; vertical-align: bottom;">
                 <span style="font-size: 10px;">
                     The approval iS subject to the company maintaining is systern the required standards.<br>
                     which will be monitored by Merlion Certification Body.<br>

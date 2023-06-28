@@ -24,55 +24,46 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr class="table-active">
-                            <th class="actionWidth">Action</th>
-                            <th>Nama</th>
-                            <th>Tipe Trining</th>
-                            <th>Title</th>
-                            <th>Nomor Sertifikat</th>
-                            <th>Alamat</th>
-                            <th>Scope</th>
-                            <th>Diterbitkan</th>
-                            <th>Kadaluarsa</th>
-                            <th>Tanggal Sertifikat</th>
+                            <th style="text-align: center; vertical-align: middle;">Action</th>
+                            <th style="text-align: center; vertical-align: middle;">Nama</th>
+                            <th style="text-align: center; vertical-align: middle;">Tipe Trining</th>
+                            <th style="text-align: center; vertical-align: middle;">Title</th>
+                            <th style="text-align: center; vertical-align: middle;">Nomor Sertifikat</th>
+                            <th style="text-align: center; vertical-align: middle;">Alamat</th>
+                            <th style="text-align: center; vertical-align: middle;">Scope</th>
                         </tr>
                     </thead>
                     <tfoot>
                         <tr class="table-active">
-                            <th>Action</th>
-                            <th>Nama</th>
-                            <th>Tipe Trining</th>
-                            <th>Title</th>
-                            <th>Nomor Sertifikat</th>
-                            <th>Alamat</th>
-                            <th>Scope</th>
-                            <th>Diterbitkan</th>
-                            <th>Kadaluarsa</th>
-                            <th>Tanggal Sertifikat</th>
+                            <th style="text-align: center; vertical-align: middle;">Action</th>
+                            <th style="text-align: center; vertical-align: middle;">Nama</th>
+                            <th style="text-align: center; vertical-align: middle;">Tipe Trining</th>
+                            <th style="text-align: center; vertical-align: middle;">Title</th>
+                            <th style="text-align: center; vertical-align: middle;">Nomor Sertifikat</th>
+                            <th style="text-align: center; vertical-align: middle;">Alamat</th>
+                            <th style="text-align: center; vertical-align: middle;">Scope</th>
                         </tr>
                     </tfoot>
                     @foreach($certificate as $cert)
                     <tbody>
                         <tr>
-                            <td>
-                                <button class="btn btn-primary" title="Edit" id="update" onclick="updCertificate({{$cert->id}})">
+                            <td style="vertical-align: middle;">
+                                <button class="btn btn-primary actBtn" title="Edit" id="update" onclick="updCertificate({{$cert->id}})">
                                     <i class="fas fa-pencil-ruler"></i>
-                                </button>
-                                <button class="btn btn-info" title="Detil" id="detil" onclick="showQrCode('{{$cert->number}}', '{{$cert->name}}')">
+                                </button><br>
+                                <button class="btn btn-info  actBtn" title="Detil" id="detil" onclick="showQrCode('{{$cert->number}}', '{{$cert->name}}', '{{$cert->id}}')">
                                     <i class="fas fa-eye"></i>
-                                </button>
-                                <button class="btn btn-danger" title="Hapus" onclick="delCertificate({{$cert->id}})">
+                                </button><br>
+                                <button class="btn btn-danger actBtn" title="Hapus" onclick="delCertificate({{$cert->id}})">
                                     <i class="fas fa-trash-alt"></i>
                                 </button>
                             </td>
-                            <td>{{$cert->name}}</td>
-                            <td>{{$cert->type}}</td>
-                            <td>{{$cert->title}}</td>
-                            <td>{{$cert->number}}</td>
-                            <td>{{$cert->address}}</td>
-                            <td>{{$cert->scope}}</td>
-                            <td>{{$cert->effective}}</td>
-                            <td>{{$cert->expired}}</td>
-                            <td>{{$cert->date}}</td>
+                            <td style="vertical-align: middle;">{{$cert->name}}</td>
+                            <td style="vertical-align: middle;">{{$cert->type}}</td>
+                            <td style="vertical-align: middle;">{{$cert->title}}</td>
+                            <td style="vertical-align: middle;">{{$cert->number}}</td>
+                            <td style="vertical-align: middle;">{{$cert->address}}</td>
+                            <td style="vertical-align: middle;">{{$cert->scope}}</td>
                         </tr>
                     </tbody>
                     @endforeach
@@ -102,56 +93,52 @@
         })
     });
 
-    function showQrCode(number, name) {
+    function showQrCode(number, name, id) {
         let newNumber = number.replace(new RegExp("/", "g"), "");
+        let url = '/certificate/printPDF/' + id + '/' + newNumber;
 
-        axios.get(`/certificate/qrcode/${newNumber}`)
-            .then(function({
-                data
-            }) {
-                $('.modal-title').html(`QRCode untuk ${name}`);
-                $('.modal-body').html(`<div class='text-center'>
-                <div>
-                    <img width='300' height='auto' src='data:image/svg+xml;base64,${data.DATA}' />
-                </div><br>
-                    <div>
-                        <a href='data:image/svg+xml;base64,${data.DATA}' class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm" download=${name}>
-                        <i class="fas fa-download"></i>  Download QR Code</a>
-                    </div>
-                </div>`);
-                $('#modalSmall').modal('show');
-            })
-            .catch(function(error) {
-                console.log(error);
-            });
+        window.open(url, '_blank');
     }
 
     function delCertificate(id) {
-        axios.post('/certificate/delete/' + id)
-            .then((response) => {
-                Swal.fire({
-                    title: 'Apakah anda yakin?',
-                    text: "Data yang dihapus tidak akan bisa kembalikan.",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonText: 'Hapus',
-                    cancelButtonText: 'Batal',
-                    reverseButtons: true
-                }).then((response) => {
-                    location.reload();
-                })
-            }).catch((err) => {
-                Swal.fire({
-                    title: 'Error',
-                    position: 'top-end',
-                    icon: 'error',
-                    text: err,
-                    showConfirmButton: false,
-                    width: '400px',
-                    timer: 1500
-                })
-            })
+        Swal.fire({
+            title: 'Apakah anda yakin?',
+            text: "Data yang dihapus tidak akan bisa kembali.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Hapus',
+            cancelButtonText: 'Batal',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axios.post('/certificate/delete/' + id)
+                    .then(() => {
+                        Swal.fire({
+                            title: 'Sukses',
+                            position: 'top-end',
+                            icon: 'success',
+                            text: 'Data berhasil dihapus.',
+                            showConfirmButton: false,
+                            width: '400px',
+                            timer: 1500
+                        });
+                        location.reload();
+                    })
+                    .catch((err) => {
+                        Swal.fire({
+                            title: 'Error',
+                            position: 'top-end',
+                            icon: 'error',
+                            text: err,
+                            showConfirmButton: false,
+                            width: '400px',
+                            timer: 1500
+                        });
+                    });
+            }
+        });
     }
+
 
     function updCertificate(id) {
         axios.get('/certificate/update/' + id)

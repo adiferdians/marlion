@@ -74,15 +74,30 @@
             width: 150px;
             padding-left: 70px;
         }
+
+        .approval {
+            font-size: 10px; 
+            position: absolute;
+            bottom: 100px;
+            left: 0px;
+        }
     </style>
 </head>
 
 <body>
     <div>
+        @if($status == "draft")
         <img class="draft" src="{{ public_path('/assets/img/logo/draft.png') }}">
+        @endif
         <img class="marlion-logo2" src="{{ public_path('/assets/img/logo/logo.png') }}">
         <img class="tab-logo" src="{{ public_path('/assets/img/logo/tab.png') }}">
-        <img class="certified" src="{{ public_path('/assets/img/logo/Asset mark 9k.png') }}">
+        @if($iso == 9)
+        <img class="certified" src="{{ public_path('/assets/img/logo/9k.png') }}">
+        @elseif($iso == 22)
+        <img class="certified" src="{{ public_path('/assets/img/logo/22k.png') }}">
+        @elseif($iso == 27)
+        <img class="certified" src="{{ public_path('/assets/img/logo/27k.png') }}">
+        @endif
         <img class="qrCode" width="300" height="auto" src="data:image/svg+xml;base64,{{$qrCode}}" alt="QR Code" />
         <img class="bgimage" src="{{ public_path('/assets/img/logo/background.png') }}">
     </div>
@@ -172,8 +187,8 @@
             </td>
         </tr>
         <tr style="width: 300px;">
-            <td style="height: 380px; vertical-align: bottom;">
-                <span style="font-size: 10px;">
+            <td style="height: 380px;">
+                <span class="approval">
                     The approval iS subject to the company maintaining is systern the required standards.<br>
                     which will be monitored by Merlion Certification Body.<br>
                     Certificate Will be issued annualu for agrement 36 month since registered.<br>

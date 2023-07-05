@@ -29,8 +29,9 @@
                             <th style="text-align: center; vertical-align: middle;">Tipe Trining</th>
                             <th style="text-align: center; vertical-align: middle;">Title</th>
                             <th style="text-align: center; vertical-align: middle;">Nomor Sertifikat</th>
-                            <th style="text-align: center; vertical-align: middle;">Alamat</th>
                             <th style="text-align: center; vertical-align: middle;">Scope</th>
+                            <th style="text-align: center; vertical-align: middle;">Status</th>
+                            <th style="text-align: center; vertical-align: middle;">ISO</th>
                         </tr>
                     </thead>
                     <tfoot>
@@ -40,30 +41,62 @@
                             <th style="text-align: center; vertical-align: middle;">Tipe Trining</th>
                             <th style="text-align: center; vertical-align: middle;">Title</th>
                             <th style="text-align: center; vertical-align: middle;">Nomor Sertifikat</th>
-                            <th style="text-align: center; vertical-align: middle;">Alamat</th>
                             <th style="text-align: center; vertical-align: middle;">Scope</th>
+                            <th style="text-align: center; vertical-align: middle;">Status</th>
+                            <th style="text-align: center; vertical-align: middle;">ISO</th>
                         </tr>
                     </tfoot>
                     @foreach($certificate as $cert)
                     <tbody>
-                        <tr>
+                        <tr {{ ($cert->status == "active") ? 'class= "table-success"' : 'class="table-danger"' }}>
                             <td style="vertical-align: middle;">
-                                <button class="btn btn-primary actBtn" title="Edit" id="update" onclick="updCertificate({{$cert->id}})">
-                                    <i class="fas fa-pencil-ruler"></i>
-                                </button><br>
-                                <button class="btn btn-info  actBtn" title="Detil" id="detil" onclick="showQrCode('{{$cert->number}}', '{{$cert->name}}', '{{$cert->id}}')">
-                                    <i class="fas fa-eye"></i>
-                                </button><br>
-                                <button class="btn btn-danger actBtn" title="Hapus" onclick="delCertificate({{$cert->id}})">
-                                    <i class="fas fa-trash-alt"></i>
-                                </button>
+                                <div style="display: flex;">
+                                    <button class="btn btn-primary actBtn" title="Edit" id="update" onclick="updCertificate({{$cert->id}})">
+                                        <i class="fas fa-pencil-ruler"></i>
+                                    </button>
+                                    <button class="btn btn-info  actBtn" title="Detil" id="detil" onclick="showQrCode('{{$cert->number}}', '{{$cert->name}}', '{{$cert->id}}')">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                                <div style="display: flex;">
+                                    <button class="btn btn-danger actBtn" title="Hapus" onclick="delCertificate({{$cert->id}})">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                    <div class="dropdown">
+                                        <button class="btn btn-secondary dropdown-toggle actBtn" type="button" id="status" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fas fa-check"></i>
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="status" id="myDropdown">
+                                            <button class="dropdown-item" type="button" data-value="active" onclick="changeStatus('active', '{{$cert->id}}')">Active</button>
+                                            <button class="dropdown-item" type="button" data-value="withdraw" onclick="changeStatus('withdraw', '{{$cert->id}}')">Withdraw</button>
+                                            <button class="dropdown-item" type="button" data-value="draft" onclick="changeStatus('draft', '{{$cert->id}}')">Draft</button>
+                                        </div>
+                                    </div>
+                                </div>
                             </td>
                             <td style="vertical-align: middle;">{{$cert->name}}</td>
                             <td style="vertical-align: middle;">{{$cert->type}}</td>
                             <td style="vertical-align: middle;">{{$cert->title}}</td>
                             <td style="vertical-align: middle;">{{$cert->number}}</td>
-                            <td style="vertical-align: middle;">{{$cert->address}}</td>
                             <td style="vertical-align: middle;">{{$cert->scope}}</td>
+                            <td style="vertical-align: middle; text-align: center;">
+                                @if($cert->status == "active")
+                                <span class="statActive">{{$cert->status}}</span>
+                                @elseif($cert->status == "withdraw")
+                                <span class="statWithdraw">{{$cert->status}}</span>
+                                @elseif($cert->status == "draft")
+                                <span class="statDraft">{{$cert->status}}</span>
+                                @endif
+                            </td>
+                            <td style="vertical-align: middle;">
+                                <select class="custom-select" id="iso" onchange="changeISO('{{$cert->id}}', this.value)" 
+                                style="width: 70px; -webkit-appearance: none; -moz-appearance: none; appearance: none; background-image: none;">
+                                    <option selected>ISO</option>
+                                    <option value="9" {{$cert->iso == '9' ? 'selected' : ''}}>9K</option>
+                                    <option value="22" {{$cert->iso == '22' ? 'selected' : ''}}>22k</option>
+                                    <option value="27" {{$cert->iso == '27' ? 'selected' : ''}}>27k</option>
+                                </select>
+                            </td>
                         </tr>
                     </tbody>
                     @endforeach
@@ -92,6 +125,88 @@
                 });
         })
     });
+
+    function changeStatus(status, id) {
+        Swal.fire({
+            title: 'Yakin ingin mengubah status Sertifikat?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'ya, Ubah!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                if (result.isConfirmed) {
+                    axios.post('/certificate/changeStatus/' + id, {
+                            status,
+                        }).then(() => {
+                            Swal.fire({
+                                title: 'Sukses',
+                                position: 'top-end',
+                                icon: 'success',
+                                text: 'Status berhasil diubah!.',
+                                showConfirmButton: false,
+                                width: '400px',
+                                timer: 2000
+                            });
+                            location.reload();
+                        })
+                        .catch((err) => {
+                            Swal.fire({
+                                title: 'Error',
+                                position: 'top-end',
+                                icon: 'error',
+                                text: err,
+                                showConfirmButton: false,
+                                width: '400px',
+                                timer: 2000
+                            });
+                        });
+                }
+            }
+        })
+    };
+
+    function changeISO(id, iso) {
+        Swal.fire({
+            title: 'Yakin ingin mengubah Iso Sertifikat?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'ya, Ubah!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                if (result.isConfirmed) {
+                    axios.post('/certificate/changeISO/' + id, {
+                            iso,
+                        }).then(() => {
+                            Swal.fire({
+                                title: 'Sukses',
+                                position: 'top-end',
+                                icon: 'success',
+                                text: 'ISO berhasil diubah!.',
+                                showConfirmButton: false,
+                                width: '400px',
+                                timer: 2000
+                            });
+                            location.reload();
+                        })
+                        .catch((err) => {
+                            Swal.fire({
+                                title: 'Error',
+                                position: 'top-end',
+                                icon: 'error',
+                                text: err,
+                                showConfirmButton: false,
+                                width: '400px',
+                                timer: 2000
+                            });
+                        });
+                }
+            }
+        })
+    }
 
     function showQrCode(number, name, id) {
         let newNumber = number.replace(new RegExp("/", "g"), "");

@@ -24,6 +24,8 @@ return new class extends Migration
             $table->string('effective');
             $table->string('expired');
             $table->string('date');
+            $table->string('status');
+            $table->string('iso');
             $table->timestamps();
         });
     }

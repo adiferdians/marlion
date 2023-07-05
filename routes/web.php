@@ -28,6 +28,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/certificate/sendUpdate/{id}', [CertificateController::class, 'update']);
     Route::get('/certificate/detil/{id}', [CertificateController::class, 'detil']);
     Route::get('/certificate/printPDF/{id}/{number}', [CertificateController::class, 'printPDF'])->name('generatePDF');
+    Route::post('/certificate/changeStatus/{id}', [CertificateController::class, 'changeStatus']);
+    Route::post('/certificate/changeISO/{id}', [CertificateController::class, 'changeISO']);
     Route::post('/certificate/delete/{id}', [CertificateController::class, 'delete']);
 });
 

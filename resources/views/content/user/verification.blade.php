@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nusatama</title>
+    <title>Merlion</title>
     <link rel="icon" type="image/png" href="{{ asset('assets/img/logo/logo1.png') }}">
 
     <!-- Custom fonts for this template-->
@@ -28,7 +28,7 @@
         <div id="content-wrapper" class="d-flex flex-column">
             <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
                 <div>
-                    <img class="inverted" src="{{ asset('assets/img/logo/logo white.png') }}" alt="">
+                    <img class="inverted" src="{{ asset('assets/img/logo/logo.png') }}" alt="">
                 </div>
             </nav>
             <div class="contentVerif">
@@ -78,6 +78,7 @@
                                             <th style="vertical-align: middle; text-align:center">Effective Date</th>
                                             <th style="vertical-align: middle; text-align:center">Expired Date</th>
                                             <th style="vertical-align: middle; text-align:center">Date</th>
+                                            <th style="vertical-align: middle; text-align:center">Status</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -93,6 +94,7 @@
                                             <td>{{$certificate[0]['effective']}}</td>
                                             <td>{{$certificate[0]['expired']}}</td>
                                             <td>{{$certificate[0]['date']}}</td>
+                                            <td>{{$certificate[0]['status']}}</td>
                                         </tr>
                                         @endif
                                     </tbody>
@@ -143,12 +145,13 @@
                         '<td>' + data.type + '</td>' +
                         '<td>' + data.title + '</td>' +
                         '<td>' + data.sub_title + '</td>' +
+                        '<td>' + data.number + '</td>' +
                         '<td>' + data.address + '</td>' +
                         '<td>' + data.scope + '</td>' +
-                        '<td>' + data.number + '</td>' +
                         '<td>' + data.effective + '</td>' +
                         '<td>' + data.expired + '</td>' +
                         '<td>' + data.date + '</td>' +
+                        '<td>' + data.status + '</td>' +
                         '</tr>';
                     tableBody.append(row);
                 })

@@ -104,6 +104,8 @@ class CertificateController extends Controller
                 'effective' => $request->effective,
                 'expired' => $request->expired,
                 'date' => $request->date,
+                'status' => "draft",
+                'iso' => 9,
                 'created_at' => Carbon::now()->toDateTimeString(),
                 'updated_at' => Carbon::now()->toDateTimeString(),
             ];
@@ -207,11 +209,73 @@ class CertificateController extends Controller
             'scope' => $certificate[0]['scope'],
             'effective' => $certificate[0]['effective'],
             'expired' => $certificate[0]['expired'],
+            'status' => $certificate[0]['status'],
+            'iso' => $certificate[0]['iso'],
             'qrCode' => base64_encode($qrCode),
         ];
 
         $pdf = PDF::loadView('pdf.tamplate', $data);
         $pdf->setPaper('A4', 'portrait');
         return $pdf->stream();
+    }
+
+    public function changeStatus(Request $request, $id)
+    {
+        $validate = Validator::make($request->all(), [
+            'status'   => 'required'
+        ]);
+
+        if ($validate->fails()) {
+            return response()->json([
+                'success' => false,
+                'messages' => $validate->messages()
+            ], 422);
+        }
+        DB::beginTransaction();
+        try {
+            $data = [
+                'status' => $request->status,
+                'updated_at' => Carbon::now()->toDateTimeString(),
+            ];
+
+            certificate::where('id', $id)->update($data);
+            DB::commit();
+
+            return response()->json(['success' => true, 'message' => 'Status berhasil diubah', 'data' => $data], 201);
+        } catch (\Exception $e) {
+            DB::rollback();
+
+            return response()->json(['success' => false, 'messages' => $e->getMessage()], 400);
+        }
+    }
+
+    public function changeISO(Request $request, $id)
+    {
+        $validate = Validator::make($request->all(), [
+            'iso'   => 'required'
+        ]);
+
+        if ($validate->fails()) {
+            return response()->json([
+                'success' => false,
+                'messages' => $validate->messages()
+            ], 422);
+        }
+        DB::beginTransaction();
+        try {
+            $data = [
+                'iso' => $request->iso,
+                'updated_at' => Carbon::now()->toDateTimeString(),
+            ];
+
+            certificate::where('id', $id)->update($data);
+            DB::commit();
+
+            return response()->json(['success' => true, 'message' => 'ISO berhasil diubah', 'data' => $data], 201);
+        } catch (\Exception $e) {
+            DB::rollback();
+
+            return response()->json(['success' => false, 'messages' => $e->getMessage()], 400);
+        }
     }
 }

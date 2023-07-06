@@ -34,8 +34,6 @@ class CertificateController extends Controller
             'subTitle'   => 'required',
             'address'   => 'required',
             'scope'   => 'required',
-            'type'   => 'required',
-            'effective'   => 'required',
             'expired'   => 'required',
             'date'   => 'required',
         ]);
@@ -59,14 +57,6 @@ class CertificateController extends Controller
             $increment = ($increment - $remainder) / $base;
         }
         $code = str_pad($number, 4, 'A', STR_PAD_LEFT);
-
-        if ($request->type == "Public Training") {
-            $kodeType = "PT";
-        } elseif ($request->type == "Inhouse Training") {
-            $kodeType = "IT";
-        } elseif ($request->type == "Custom Training") {
-            $kodeType = "CT";
-        }
 
         $bulan = date('m', strtotime($request->date));
         $tahun = date('Y', strtotime($request->date));
@@ -93,15 +83,13 @@ class CertificateController extends Controller
         DB::beginTransaction();
         try {
             $data = [
-                'name' => strtolower($request->name),
+                'name' => $request->name,
                 'title' => $request->title,
                 'sub_title' => $request->subTitle,
                 'address' => $request->address,
                 'scope' => $request->scope,
-                'type' => $request->type,
-                'number' => $code . "/" . $kodeType . "/" . $bulan_romawi . "/" . $tahun,
-                'number_convert' => $code . $kodeType . $bulan_romawi . $tahun,
-                'effective' => $request->effective,
+                'number' => $code . "/" . $bulan_romawi . "/" . $tahun,
+                'number_convert' => $code . $bulan_romawi . $tahun,
                 'expired' => $request->expired,
                 'date' => $request->date,
                 'status' => "draft",
@@ -137,9 +125,7 @@ class CertificateController extends Controller
             'subTitle'   => 'required',
             'address'   => 'required',
             'scope'   => 'required',
-            'type'   => 'required',
             'number' => 'required',
-            'effective'   => 'required',
             'expired'   => 'required',
             'date'   => 'required',
         ]);
@@ -153,15 +139,13 @@ class CertificateController extends Controller
         DB::beginTransaction();
         try {
             $data = [
-                'name' => strtolower($request->name),
+                'name' => $request->name,
                 'title' => $request->title,
                 'sub_title' => $request->subTitle,
                 'address' => $request->address,
                 'scope' => $request->scope,
-                'type' => $request->type,
                 'number' => $request->number,
                 'number_convert' => $request->number_convert,
-                'effective' => $request->effective,
                 'expired' => $request->expired,
                 'date' => $request->date,
                 'updated_at' => Carbon::now()->toDateTimeString(),
@@ -207,7 +191,7 @@ class CertificateController extends Controller
             'number' => $certificate[0]['number'],
             'address' => $certificate[0]['address'],
             'scope' => $certificate[0]['scope'],
-            'effective' => $certificate[0]['effective'],
+            'date' => $certificate[0]['date'],
             'expired' => $certificate[0]['expired'],
             'status' => $certificate[0]['status'],
             'iso' => $certificate[0]['iso'],

@@ -25,25 +25,25 @@
                     <thead>
                         <tr class="table-active">
                             <th style="text-align: center; vertical-align: middle;">Action</th>
-                            <th style="text-align: center; vertical-align: middle;">Nama</th>
-                            <th style="text-align: center; vertical-align: middle;">Tipe Trining</th>
+                            <th style="text-align: center; vertical-align: middle;">Organization</th>
                             <th style="text-align: center; vertical-align: middle;">Title</th>
                             <th style="text-align: center; vertical-align: middle;">Nomor Sertifikat</th>
-                            <th style="text-align: center; vertical-align: middle;">Scope</th>
-                            <th style="text-align: center; vertical-align: middle;">Status</th>
+                            <th style="text-align: center; vertical-align: middle;">Expiry</th>
+                            <th style="text-align: center; vertical-align: middle;">Date</th>
                             <th style="text-align: center; vertical-align: middle;">ISO</th>
+                            <th style="text-align: center; vertical-align: middle;">Status</th>
                         </tr>
                     </thead>
                     <tfoot>
                         <tr class="table-active">
                             <th style="text-align: center; vertical-align: middle;">Action</th>
-                            <th style="text-align: center; vertical-align: middle;">Nama</th>
-                            <th style="text-align: center; vertical-align: middle;">Tipe Trining</th>
+                            <th style="text-align: center; vertical-align: middle;">Organization</th>
                             <th style="text-align: center; vertical-align: middle;">Title</th>
                             <th style="text-align: center; vertical-align: middle;">Nomor Sertifikat</th>
-                            <th style="text-align: center; vertical-align: middle;">Scope</th>
-                            <th style="text-align: center; vertical-align: middle;">Status</th>
+                            <th style="text-align: center; vertical-align: middle;">Expiry</th>
+                            <th style="text-align: center; vertical-align: middle;">Date</th>
                             <th style="text-align: center; vertical-align: middle;">ISO</th>
+                            <th style="text-align: center; vertical-align: middle;">Status</th>
                         </tr>
                     </tfoot>
                     @foreach($certificate as $cert)
@@ -75,10 +75,18 @@
                                 </div>
                             </td>
                             <td style="vertical-align: middle;">{{$cert->name}}</td>
-                            <td style="vertical-align: middle;">{{$cert->type}}</td>
                             <td style="vertical-align: middle;">{{$cert->title}}</td>
                             <td style="vertical-align: middle;">{{$cert->number}}</td>
-                            <td style="vertical-align: middle;">{{$cert->scope}}</td>
+                            <td style="vertical-align: middle;">{{$cert->expired}}</td>
+                            <td style="vertical-align: middle;">{{$cert->date}}</td>
+                            <td style="vertical-align: middle;">
+                                <select class="custom-select" id="iso" onchange="changeISO('{{$cert->id}}', this.value)" style="width: 70px; -webkit-appearance: none; -moz-appearance: none; appearance: none; background-image: none;">
+                                    <option selected>ISO</option>
+                                    <option value="9" {{$cert->iso == '9' ? 'selected' : ''}}>9K</option>
+                                    <option value="22" {{$cert->iso == '22' ? 'selected' : ''}}>22k</option>
+                                    <option value="27" {{$cert->iso == '27' ? 'selected' : ''}}>27k</option>
+                                </select>
+                            </td>
                             <td style="vertical-align: middle; text-align: center;">
                                 @if($cert->status == "active")
                                 <span class="statActive">{{$cert->status}}</span>
@@ -87,15 +95,6 @@
                                 @elseif($cert->status == "draft")
                                 <span class="statDraft">{{$cert->status}}</span>
                                 @endif
-                            </td>
-                            <td style="vertical-align: middle;">
-                                <select class="custom-select" id="iso" onchange="changeISO('{{$cert->id}}', this.value)" 
-                                style="width: 70px; -webkit-appearance: none; -moz-appearance: none; appearance: none; background-image: none;">
-                                    <option selected>ISO</option>
-                                    <option value="9" {{$cert->iso == '9' ? 'selected' : ''}}>9K</option>
-                                    <option value="22" {{$cert->iso == '22' ? 'selected' : ''}}>22k</option>
-                                    <option value="27" {{$cert->iso == '27' ? 'selected' : ''}}>27k</option>
-                                </select>
                             </td>
                         </tr>
                     </tbody>

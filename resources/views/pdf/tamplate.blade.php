@@ -5,12 +5,12 @@
     <title>{{ $title }}</title>
     <style>
         @font-face {
-            font-family: 'Roboto';
-            src: url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+            font-family: 'Quicksand';
+            src: url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap') format("truetype");
         }
 
         body {
-            font-family: 'Roboto', sans-serif;
+            font-family: 'Quicksand', sans-serif;
             font-size: 14px;
             color: #333333;
             right: 0;
@@ -70,16 +70,47 @@
             right: -50px;
         }
 
-        .sign {
-            width: 150px;
-            padding-left: 70px;
-        }
-
         .approval {
-            font-size: 10px; 
+            font-size: 10px;
             position: absolute;
             bottom: 100px;
             left: 0px;
+        }
+
+        .sign-section {
+            position: absolute;
+            bottom: 420px;
+        }
+
+        .sign {
+            position: absolute;
+            width: 150px;
+            right: -220px;
+            margin-top: -70px;
+        }
+
+        hr {
+            width: 200px;
+            right: -250px;
+            position: absolute;
+        }
+
+        .managing {
+            position: absolute;
+            right: -210px;
+            padding-top: 20px;
+        }
+
+        .ex {
+            position: absolute;
+            bottom: 340px;
+            padding-left: 380px;
+        }
+
+        .date {
+            position: absolute;
+            bottom: 360px;
+            padding-left: 380px;
         }
     </style>
 </head>
@@ -104,7 +135,7 @@
     <table style="width: 100%;">
         <tr>
             <td colspan="2" style="height: 80px; vertical-align: top;">
-                <span style="font-size: 40px;">Certificate Of registration</span>
+                <span style="font-size: 40px;">Certificate Of Registration</span>
             </td>
         </tr>
         <tr>
@@ -157,48 +188,31 @@
                 <img style="height: 30px;" src="{{ public_path('/assets/img/space.png') }}">
             </td>
         </tr>
-        <tr style="vertical-align: bottom;">
-            <td>
-                <span>For and on behalf of Merlion:</span>
-            </td>
-            <td>
-                <img class="sign" src="{{ public_path('/assets/img/logo/tab.png') }}">
-                <hr style="width: 200px;">
-                <span style="padding-left: 90px;">Managing Director</span>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <img style="height: 10px;" src="{{ public_path('/assets/img/space.png') }}">
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td>
-                <span>Effective date : </span>
-                <span>{{ $effective}}</span>
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td>
-                <span>Expiry date : </span>
-                <span>{{ $expired}}</span>
-            </td>
-        </tr>
-        <tr style="width: 300px;">
-            <td style="height: 380px;">
-                <span class="approval">
-                    The approval iS subject to the company maintaining is systern the required standards.<br>
-                    which will be monitored by Merlion Certification Body.<br>
-                    Certificate Will be issued annualu for agrement 36 month since registered.<br>
-                    Remans valid subject to satisfactory surveillance audit.<br>
-                    All nght reserved. detail www.merlon-cbcom
-                </span>
-            </td>
-            <td></td>
-        </tr>
     </table>
+    <div class="sign-section">
+        <span>For and on behalf of Merlion:</span>
+        <img class="sign" src="{{ public_path('/assets/img/logo/sign.png') }}">
+        <hr>
+        <span class="managing">Managing Director</span>
+    </div>
+    <div class="date">
+        <span>Effective date </span>
+        <span style="padding-left: 21px;">:</span>
+        <span>{{ $date }}</span>
+    </div>
+    <div class="ex">
+        <span>Expiry date</span>
+        <span style="padding-left: 40px;">:</span>
+        <span>{{ $expired}}</span>
+    </div>
+
+    <span class="approval">
+        The approval iS subject to the company maintaining is systern the required standards.<br>
+        which will be monitored by Merlion Certification Body.<br>
+        Certificate Will be issued annualu for agrement 36 month since registered.<br>
+        Remans valid subject to satisfactory surveillance audit.<br>
+        All nght reserved. detail www.merlon-cbcom
+    </span>
 </body>
 
 </html>

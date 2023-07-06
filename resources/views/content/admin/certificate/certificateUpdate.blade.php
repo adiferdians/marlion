@@ -4,18 +4,8 @@
         <td><input type="text" id="id" value="{{$cert->id}}" hidden></td>
     </tr>
     <tr>
-        <td>Nama</td>
-        <td><input type="text" style="width: 100%" class="form-control" placeholder="Nama" type="text" id="name" value="{{$cert->name}}"></td>
-    </tr>
-    <tr>
-        <td>Tipe Training</td>
-        <td>
-        <select class="form-control" id="type" style="width: 100%" >
-                <option>Public Training</option>
-                <option>Inhouse Training</option>
-                <option>Custom Training</option>
-            </select>
-        </td>
+        <td>Organization</td>
+        <td><input type="text" style="width: 100%" class="form-control" placeholder="Organization" type="text" id="name" value="{{$cert->name}}"></td>
     </tr>
     <tr>
         <td>Nomor Sertifikat</td>
@@ -43,12 +33,9 @@
         </td>
     </tr>
     <tr>
-        <td>Trining Mulai Dan Training Selesai</td>
+        <td>Expiary Date</td>
         <td>
-            <div style="display: flex;">
-                <input type="date" style="width: 50%;" class="form-control" type="text" id="effective" value="{{$cert->effective}}">
-                <input type="date" style="width: 50%;" class="form-control" type="text" id="expired" value="{{$cert->expired}}">
-            </div>
+            <input type="date" class="form-control" type="text" id="expired" value="{{$cert->expired}}">
         </td>
     </tr>
     <tr>
@@ -68,27 +55,23 @@
     $('#send').click(function() {
         const id = $('#id').val();
         const name = $('#name').val();
-        const type = $('#type').val();
         const title = $('#title').val();
         const subTitle = $('#sub_title').val();
         const address = $('#address').val();
         const scope = $('#scope').val();
         const number = $('#number').val();
         const number_convert = number.replace(new RegExp("/", "g"), "");
-        const effective = $('#effective').val();
         const expired = $('#expired').val();
         const date = $('#date').val();
 
         axios.post('/certificate/sendUpdate/' + id, {
             name,
-            type,
             title,
             subTitle,
             address,
             scope,
             number,
             number_convert,
-            effective,
             expired,
             date
         }).then((response) => {

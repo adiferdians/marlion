@@ -1,17 +1,7 @@
 <table border="0" class="table table-light" id="tableCertificate">
     <tr>
-        <td>Nama</td>
-        <td><input type="text" style="width: 100%" class="form-control" placeholder="Nama" type="text" id="name"></td>
-    </tr>
-    <tr>
-        <td>Tipe Training</td>
-        <td>
-            <select class="form-control" id="type" style="width: 100%" >
-                <option>Public Training</option>
-                <option>Inhouse Training</option>
-                <option>Custom Training</option>
-            </select>
-        </td>
+        <td>Organization</td>
+        <td><input type="text" style="width: 100%" class="form-control" placeholder="Organization" type="text" id="name"></td>
     </tr>
     <tr>
         <td>Title</td>
@@ -34,17 +24,14 @@
         </td>
     </tr>
     <tr>
-    <td>Trining Mulai Dan Training Selesai</td>
-        <td>
-            <div style="display: flex;">
-                <input type="date" style="width: 50%;" class="form-control" type="text" id="effective">
-                <input type="date" style="width: 50%;" class="form-control" type="text" id="expired">
-            </div>
+        <td>Tanggal Sertifikat</td>
+        <td><input type="date" style="width: 100%;" class="form-control" type="text" id="date">
         </td>
     </tr>
     <tr>
-        <td>Tanggal Sertifikat</td>
-        <td><input type="date" style="width: 100%;" class="form-control" type="text" id="date">
+        <td>Tanggal Expired</td>
+        <td>
+            <input type="date" class="form-control" type="text" id="expired">
         </td>
     </tr>
     <tr>
@@ -62,7 +49,6 @@
         const subTitle = $('#sub_title').val();
         const address = $('#address').val();
         const scope = $('#scope').val();
-        const effective = $('#effective').val();
         const expired = $('#expired').val();
         const date = $('#date').val();
 
@@ -73,7 +59,6 @@
             subTitle,
             address,
             scope,
-            effective,
             expired,
             date
         }).then((response) => {

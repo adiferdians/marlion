@@ -10,7 +10,7 @@
     <meta name="author" content="">
 
     <title>@yield('title')</title>
-    <link rel="icon" type="image/png" href="{{ asset('assets/img/logo/logo1.png') }}">
+    <link rel="icon" type="image/png" href="{{ asset('assets/img/logo/title.png') }}">
 
     <!-- Tambahkan jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

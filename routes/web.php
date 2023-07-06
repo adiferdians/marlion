@@ -24,9 +24,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/certificate', [CertificateController::class, 'index']);
     Route::get('/certificate/create', [CertificateController::class, 'create']);
     Route::post('/certificate/send', [CertificateController::class, 'send']);
+    Route::get('/certificate/detil/{id}', [CertificateController::class, 'detil']);
     Route::get('/certificate/update/{id}', [CertificateController::class, 'getUpdate']);
     Route::post('/certificate/sendUpdate/{id}', [CertificateController::class, 'update']);
-    Route::get('/certificate/detil/{id}', [CertificateController::class, 'detil']);
     Route::get('/certificate/printPDF/{id}/{number}', [CertificateController::class, 'printPDF'])->name('generatePDF');
     Route::post('/certificate/changeStatus/{id}', [CertificateController::class, 'changeStatus']);
     Route::post('/certificate/changeISO/{id}', [CertificateController::class, 'changeISO']);

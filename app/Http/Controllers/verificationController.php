@@ -23,7 +23,7 @@ class verificationController extends Controller
 
     public function find(Request $request)
     {
-        $name = strtolower($request->nama);
+        $name = $request->nama;
         $newNumber = implode("/", $request->newNumber);
         $certificate = certificate::where('number', $newNumber)->where('name', $name)->first();
 

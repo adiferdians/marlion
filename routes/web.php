@@ -20,8 +20,7 @@ Route::get('out', [loginController::class, 'out']);
 Route::post('login', [loginController::class, 'Auth'])->middleware("throttle:3,2");
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard', [dashboardController::class, 'dashboard']);
-    Route::get('/certificate', [CertificateController::class, 'index']);
+    Route::get('/dashboard', [CertificateController::class, 'index']);
     Route::get('/certificate/create', [CertificateController::class, 'create']);
     Route::post('/certificate/send', [CertificateController::class, 'send']);
     Route::get('/certificate/detil/{id}', [CertificateController::class, 'detil']);

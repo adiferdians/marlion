@@ -77,25 +77,14 @@
                     <div class="sidebar-brand-text mx-3"><img style="width: 190px; background-color: white; border-radius: 10px;" src="\assets\img\logo\logo.png" alt=""></div>
                 </div>
             </a>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider my-0">
-
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item @yield('dasboard')">
-                <a class="nav-link" href="/dashboard">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
-            </li>
-
             <!-- Divider -->
             <hr class="sidebar-divider">
 
             <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item @yield('certificate')">
-                <a class="nav-link" href="/certificate" aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-file"></i>
-                    <span>Certificate</span>
+            <li class="nav-item @yield('Dashboard')">
+                <a class="nav-link" href="#" aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
                 </a>
             </li>
 

@@ -15,9 +15,17 @@ class CertificateController extends Controller
 {
     public function index()
     {
+        $countCertificate = certificate::count();
+        $active = certificate::where('status', 'active')->count();
+        $withdraw = certificate::where('status', 'withdraw')->count();
+        $draft = certificate::where('status', 'draft')->count();
         $certificate = certificate::orderByDesc('id')->paginate(10);
         return view('content.admin.certificate.certificate', [
-            'certificate' => $certificate
+            'certificate' => $certificate,
+            'amount' => $countCertificate,
+            'active' => $active,
+            'withdraw' => $withdraw,
+            'draft' => $draft
         ]);
     }
 

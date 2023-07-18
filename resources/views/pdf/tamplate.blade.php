@@ -6,7 +6,7 @@
     <style>
         @font-face {
             font-family: 'Quicksand';
-            src: url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap') format("truetype");
+            src: url('https://fonts.googleapis.com/css2?family=Quicksand:wght@100&display=swap') format("truetype");
         }
 
         body {
@@ -134,18 +134,18 @@
     </div>
     <table style="width: 100%;">
         <tr>
-            <td colspan="2" style="height: 80px; vertical-align: top;">
+            <td colspan="2" style="height: 88px; vertical-align: bottom;">
                 <span style="font-size: 40px;">Certificate Of Registration</span>
             </td>
         </tr>
         <tr>
-            <td colspan="2">
-                <span>{{$sub_title}}</span>
+            <td colspan="2"style="height: 50px; vertical-align: bottom;">
+                <span style="font-size: 14;">{{$sub_title}}</span>
             </td>
         </tr>
         <tr>
             <td colspan="2" style="height: 50px; vertical-align: top;">
-                <span style="font-size: 20px;">{{ $title }}</span>
+                <span style="font-size: 24px;">{{ $title }}</span>
             </td>
         </tr>
         <tr>
@@ -207,11 +207,11 @@
     </div>
 
     <span class="approval">
-        The approval iS subject to the company maintaining is systern the required standards.<br>
-        which will be monitored by Merlion Certification Body.<br>
-        Certificate Will be issued annualu for agrement 36 month since registered.<br>
-        Remans valid subject to satisfactory surveillance audit.<br>
-        All nght reserved. detail www.merlon-cbcom
+        The approval is subject to the company maintaining is system the required standards, <br>
+        which will be monitored by Merlion Certification Body. <br>
+        Certificate will be issued annualy for agrement 36 month since registered. <br>
+        Remains valid subject to satisfactory surveillance audit. <br>
+        All right reserved. detail www.merlion-cb.com
     </span>
 </body>
 

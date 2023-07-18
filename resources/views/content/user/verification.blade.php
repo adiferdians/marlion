@@ -36,7 +36,7 @@
                 <div class="col-xl-4 col-md-6 mb-4">
                     <div class="container-fluid">
                         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                            <h1 class="h3 mb-0 text-gray-800">Masukan Data Peserta</h1>
+                            <h1 class="h3 mb-0 text-gray-800">Input ID Certificate</h1>
                         </div>
                         <div class="card shadow mb-4">
                             <div class="card-body">
@@ -62,7 +62,7 @@
                 <div class="col-xl-8 col-md-6 mb-4" id="dataPeserta">
                     <div class="container-fluid">
                         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                            <h1 class="h3 mb-0 text-gray-800">Informasi Peserta</h1>
+                            <h1 class="h3 mb-0 text-gray-800">Certificate Information</h1>
                         </div>
                         <div class="card shadow mb-4" style="width: fit-content; min-width: 300px;" id="sapi">
                             <div class="card-body">
@@ -202,6 +202,29 @@
                 }).then(function() {
                     var tableBody = $('#dataTable tbody');
                     tableBody.empty();
+                    var row = '<tr>' +
+                        '<td>' + "Organization" + '</td>' +
+                        '<td>' + ":" + '</td>' +
+                        '</tr>' + '<tr>' +
+                        '<td>' + "Location" + '</td>' +
+                        '<td>' + ":" + '</td>' +
+                        '</tr>' + '<tr>' +
+                        '<td>' + "Certification Scope" + '</td>' +
+                        '<td>' + ":" + '</td>' +
+                        '</tr>' + '<tr>' +
+                        '<td>' + "Certification Number" + '</td>' +
+                        '<td>' + ":" + '</td>' +
+                        '</tr>' + '<tr>' +
+                        '<td>' + "Certification Date" + '</td>' +
+                        '<td>' + ":" + '</td>' +
+                        '</tr>' + '<tr>' +
+                        '<td>' + "Expiration Date" + '</td>' +
+                        '<td>' + ":" + '</td>' +
+                        '</tr>' + '<tr>' +
+                        '<td>' + "Status" + '</td>' +
+                        '<td>' + ":" + '</td>' +
+                        '</tr>';
+                    tableBody.append(row);
                 })
             }
         }).catch((err) => {

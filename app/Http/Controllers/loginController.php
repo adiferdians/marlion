@@ -21,8 +21,7 @@ class loginController extends Controller
         $date = Carbon::now()->format('H:i:s');
         if (Auth::attempt($request->only('email', 'password'))) {
             $user = Auth::user();
-            session()->put('name', $user->name);
-            $token =  $user->createToken($date)->accessToken;
+            $token =  $user->createToken($date)->plainTextToken;
 
             $response = [
                 'user'  => $user,

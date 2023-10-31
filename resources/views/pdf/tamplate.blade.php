@@ -124,10 +124,16 @@
         <img class="tab-logo" src="{{ public_path('/assets/img/logo/tab.png') }}">
         @if($iso == 9)
         <img class="certified" src="{{ public_path('/assets/img/logo/9k.png') }}">
+        @elseif($iso == 14)
+        <img class="certified" src="{{ public_path('/assets/img/logo/14k.png') }}">
         @elseif($iso == 22)
         <img class="certified" src="{{ public_path('/assets/img/logo/22k.png') }}">
         @elseif($iso == 27)
         <img class="certified" src="{{ public_path('/assets/img/logo/27k.png') }}">
+        @elseif($iso == 37)
+        <img class="certified" src="{{ public_path('/assets/img/logo/37k.png') }}">
+        @elseif($iso == 45)
+        <img class="certified" src="{{ public_path('/assets/img/logo/45k.png') }}">
         @endif
         <img class="qrCode" width="300" height="auto" src="data:image/svg+xml;base64,{{$qrCode}}" alt="QR Code" />
         <img class="bgimage" src="{{ public_path('/assets/img/logo/background.png') }}">

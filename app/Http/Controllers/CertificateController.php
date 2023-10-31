@@ -68,6 +68,7 @@ class CertificateController extends Controller
 
         $bulan = date('m', strtotime($request->date));
         $tahun = date('Y', strtotime($request->date));
+        $bulan = str_replace('0', '', $bulan);
 
         $bulan_romawi = '';
         if ($bulan >= 1 && $bulan <= 12) {
@@ -85,7 +86,7 @@ class CertificateController extends Controller
                 11 => 'XI',
                 12 => 'XII'
             ];
-            $bulan_romawi = str_repeat('X', intval($bulan / 10)) . $angka_romawi[$bulan % 10];
+            $bulan_romawi = $angka_romawi[$bulan];
         }
 
         DB::beginTransaction();
@@ -96,8 +97,8 @@ class CertificateController extends Controller
                 'sub_title' => $request->subTitle,
                 'address' => $request->address,
                 'scope' => $request->scope,
-                'number' => $code . "/" . $bulan_romawi . "/" . $tahun,
-                'number_convert' => $code . $bulan_romawi . $tahun,
+                'number' => "M-CB/".$code . "/" . $bulan_romawi . "/" . $tahun,
+                'number_convert' => "M-CB". $code . $bulan_romawi . $tahun,
                 'expired' => $request->expired,
                 'date' => $request->date,
                 'status' => "draft",

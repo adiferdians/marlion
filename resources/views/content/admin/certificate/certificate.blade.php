@@ -148,8 +148,11 @@
                                 <select class="custom-select" id="iso" onchange="changeISO('{{$cert->id}}', this.value)" style="width: 70px; -webkit-appearance: none; -moz-appearance: none; appearance: none; background-image: none;">
                                     <option selected>ISO</option>
                                     <option value="9" {{$cert->iso == '9' ? 'selected' : ''}}>9K</option>
+                                    <option value="14" {{$cert->iso == '14' ? 'selected' : ''}}>14k</option>
                                     <option value="22" {{$cert->iso == '22' ? 'selected' : ''}}>22k</option>
                                     <option value="27" {{$cert->iso == '27' ? 'selected' : ''}}>27k</option>
+                                    <option value="37" {{$cert->iso == '37' ? 'selected' : ''}}>37k</option>
+                                    <option value="45" {{$cert->iso == '45' ? 'selected' : ''}}>45k</option>
                                 </select>
                             </td>
                             <td style="vertical-align: middle; text-align: center;">
